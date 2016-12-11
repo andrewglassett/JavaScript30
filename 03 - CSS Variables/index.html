@@ -9,7 +9,7 @@
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
-    <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px" data-poop="💩">
 
     <label for="blur">Blur:</label>
     <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
@@ -21,13 +21,30 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+
+    /*
+      misc styles, nothing to do with CSS variables
+    */
+    html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+    }
+
     :root {
       --base: #ffc600;
       --spacing: 10px;
       --blur: 10px;
+
     }
 
     img {
+      margin: var(--spacing);
       padding: var(--spacing);
       background: var(--base);
       filter: blur(var(--blur));
@@ -36,10 +53,6 @@
     .hl {
       color: var(--base);
     }
-
-    /*
-      misc styles, nothing to do with CSS variables
-    */
 
     body {
       text-align: center;
@@ -72,13 +85,12 @@
 
     function handleUpdate() {
       const suffix = this.dataset.sizing || '';
-      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-    }
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix  );
 
+    }
     inputs.forEach(input => input.addEventListener('change', handleUpdate));
     inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
-
 
 </body>
 </html>
