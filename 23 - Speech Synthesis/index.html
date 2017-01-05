@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="voiceinator">
 
       <h1>The Voiceinator 5000</h1>
@@ -42,7 +41,7 @@
     voicesDropdown.innerHTML = voices
       .filter(voice => voice.lang.includes('en'))
       .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
-      .join('');
+      .join('')
   }
 
   function setVoice() {
@@ -52,7 +51,7 @@
 
   function toggle(startOver = true) {
     speechSynthesis.cancel();
-    if (startOver) {
+    if (startOver){
       speechSynthesis.speak(msg);
     }
   }
@@ -61,13 +60,13 @@
     console.log(this.name, this.value);
     msg[this.name] = this.value;
     toggle();
-  }
 
+  }
   speechSynthesis.addEventListener('voiceschanged', populateVoices);
   voicesDropdown.addEventListener('change', setVoice);
   options.forEach(option => option.addEventListener('change', setOption));
   speakButton.addEventListener('click', toggle);
-  stopButton.addEventListener('click', () => toggle(false));
+  stopButton.addEventListener('click', toggle.bind(null, false));
 
 </script>
 
